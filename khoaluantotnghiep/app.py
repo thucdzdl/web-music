@@ -91,8 +91,16 @@ def profile():
         "public_playlists": 5
     }
     return render_template('profile.html', user=user, songs=songs, playlists=playlists)
-    
-# --- 6. CHẠY ỨNG DỤNG ---
+
+# --- 6. Yêu thích ---
+# Thêm vào app.py
+@app.route('/favorites')
+def favorites():
+    # Giả sử chúng ta lấy danh sách các bài hát đã thích
+    # Ở đây mình dùng toàn bộ danh sách songs để hiển thị mẫu
+    return render_template('favorites.html', songs=songs, current_song=songs[0])
+
+# --- CHẠY ỨNG DỤNG ---
 
 if __name__ == '__main__':
     # debug=True giúp tự động tải lại khi bạn thay đổi code

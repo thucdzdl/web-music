@@ -770,3 +770,74 @@ img {
     margin-bottom: 20px;
     color: white;
 }
+/* Favorites Page Header */
+.favorites-hero {
+    height: 30vh;
+    min-height: 250px;
+    background: linear-gradient(135deg, #450af5, #8e8ee5);
+    display: flex;
+    align-items: flex-end;
+    padding: 30px;
+    gap: 30px;
+    color: white;
+}
+
+.heart-box {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, #450af5, #c4efd9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 80px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border-radius: 4px;
+}
+
+.hero-text h1 {
+    font-size: 72px;
+    font-weight: 900;
+    margin: 10px 0;
+    letter-spacing: -2px;
+}
+
+.mini-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.songs-container {
+    padding: 30px;
+    background: linear-gradient(rgba(0,0,0,0.3) 0%, #121212 100%);
+}
+
+.play-all-btn {
+    width: 56px;
+    height: 56px;
+    background-color: #1DB954;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.play-all-btn:hover {
+    transform: scale(1.05);
+}
+
+.song-info-flex {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.song-info-flex img {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+}
+
+.no-padding { padding: 0 !important; }

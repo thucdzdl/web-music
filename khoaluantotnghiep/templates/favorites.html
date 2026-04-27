@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài hát đã thích - H2T Music</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+            <span>H2T Music</span>
+        </div>
+        <nav class="menu-group">
+            <p class="label">KHÁM PHÁ</p>
+            <ul class="nav-list">
+    <li class="{{ 'active' if request.path == '/' else '' }}">
+        <a href="/">
+            <i class="fas fa-home"></i>
+            <span>Trang chủ</span>
+        </a>
+    </li>
+
+    <li class="{{ 'active' if request.path == '/trending' else '' }}">
+        <a href="/trending">
+            <i class="fas fa-bolt"></i>
+            <span>Thịnh hành</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="/library">
+            <i class="fas fa-layer-group"></i>
+            <span>Thư viện</span>
+        </a>
+    </li>
+</ul>
+        </nav>
+        <nav class="menu-group">
+            <p class="label">CÁ NHÂN</p>
+            <ul>
+                <li><a href="/favorites"><i class="fas fa-heart"></i> Yêu thích</a></li>
+                <li><i class="fas fa-history"></i> Nghe gần đây</li>
+                <li><i class="fas fa-plus-circle"></i> Tạo Playlist</li>
+            </ul>
+        </nav>
+    </aside>
+
+        <main class="main-content no-padding">
+            <header class="top-bar transparent">
+                <button onclick="history.back()" class="circle-btn"><i class="fas fa-chevron-left"></i></button>
+            </header>
+
+            <section class="favorites-hero">
+                <div class="heart-box">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="hero-text">
+                    <p class="upper">PLAYLIST</p>
+                    <h1>Bài hát đã thích</h1>
+                    <div class="meta">
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=1DB954&color=fff" class="mini-avatar">
+                        <strong>Quản trị viên</strong> • {{ songs|length }} bài hát
+                    </div>
+                </div>
+            </section>
+
+            <div class="songs-container">
+                <div class="action-buttons">
+                    <button class="play-all-btn"><i class="fas fa-play"></i></button>
+                </div>
+
+                <table class="song-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tiêu đề</th>
+                            <th>Nghệ sĩ</th>
+                            <th style="text-align: right;"><i class="far fa-clock"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for song in songs %}
+                        <tr class="song-row">
+                            <td>{{ loop.index }}</td>
+                            <td>
+                                <div class="song-info-flex">
+                                    <img src="{{ song.img }}" alt="">
+                                    <span>{{ song.name }}</span>
+                                </div>
+                            </td>
+                            <td>{{ song.title }}</td>
+                            <td style="text-align: right;">3:45</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <footer class="player-bar">
+        </footer>
+</body>
+</html>
