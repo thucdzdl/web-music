@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ - H2T Music</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
+    <title>Thịnh hành - H2T Music</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}?v=1.1">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}?v=1.1">
 </head>
 <body>
-    <aside class="sidebar">
+    <div class="app-container">
+        <aside class="sidebar">
         <div class="logo">
             <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
             <span>H2T Music</span>
@@ -51,59 +51,64 @@
         </nav>
     </aside>
 
-    <main class="main-content">
-        <header class="top-bar">
-    <div class="nav-buttons">
-        <i class="fas fa-chevron-left"></i>
-        <i class="fas fa-chevron-right"></i>
-    </div>
-    
-    <div class="user-actions">
-        <i class="far fa-bell icon-btn"></i>
-        <i class="fas fa-users icon-btn"></i>
-        <div class="auth-buttons">
-            <a href="/register" class="btn-signup">Đăng ký</a>
-            <a>/<a\>
-            <a href="/login" class="btn-login">Đăng nhập</a>
-        </div>
-    </div>
-</header>
-
-        <section class="banner">
-            <div class="banner-text">
-                <span class="tag">PREMIUM</span>
-                <h1>Nghe nhạc không giới hạn</h1>
-                <p>Thưởng thức âm thanh chất lượng cao không quảng cáo chỉ có tại H2T.</p>
-                <button class="btn-main">KHÁM PHÁ NGAY</button>
-            </div>
-        </section>
-
-        <div class="content-body">
-            <div class="section-title">
-                <h2>Gợi ý hôm nay</h2>
-                <span>Xem tất cả</span>
-            </div>
-            
-            <div class="song-grid">
-                {% for song in songs %}
-                <div class="song-card">
-                    <div class="thumb">
-                        <img src="{{ song.img }}" alt="{{ song.name }}">
-                        <button class="play-hover" onclick="loadSong('{{ song.id }}')">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                    <a href="/song/{{ song.id }}" class="info">
-                        <h4>{{ song.name }}</h4>
-                        <p>{{ song.title }}</p>
-                    </a>
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="nav-buttons">
+                    <button onclick="history.back()" class="circle-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="circle-btn"><i class="fas fa-chevron-right"></i></button>
                 </div>
-                {% endfor %}
-            </div>
-        </div>
-    </main>
+                <div class="user-actions">
+                    <i class="far fa-bell icon-btn"></i>
+                    <i class="fas fa-users icon-btn"></i>
+                    <div class="auth-buttons">
+                        <a href="/register" class="btn-signup">Đăng ký</a>
+                        <a>/<a\>
+                        <a href="/login" class="btn-login">Đăng nhập</a>
+                    </div>
+                </div>
+            </header>
 
-    <aside class="right-sidebar">
+            <section class="trending-banner">
+                <div class="trending-icon-box">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="banner-info">
+                    <span class="tag-label">PLAYLIST</span>
+                    <h1>Thịnh hành</h1>
+                    <p>Những bài hát đang làm mưa làm gió trên H2T Music tuần này.</p>
+                </div>
+            </section>
+
+            <div class="list-container">
+                <table class="song-table">
+                    <thead>
+                        <tr>
+                            <th class="col-id">#</th>
+                            <th class="col-title">Tiêu đề</th>
+                            <th class="col-artist">Nghệ sĩ</th>
+                            <th class="col-time"><i class="far fa-clock"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for song in songs %}
+                        <tr class="song-row">
+                            <td class="col-id">{{ loop.index }}</td>
+                            <td class="col-title">
+                                <div class="song-detail">
+                                    <img src="{{ song.img }}" alt="">
+                                    <span class="name">{{ song.name }}</span>
+                                </div>
+                            </td>
+                            <td class="col-artist">{{ song.title }}</td>
+                            <td class="col-time">3:45</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+         <aside class="right-sidebar">
         <h3>Tiếp theo</h3>
         <div class="queue">
             {% for song in songs[:3] %}
@@ -122,6 +127,7 @@
             <div class="lyric-text">Đang tải lời bài hát cho bạn...</div>
         </div>
     </aside>
+    </div>
 
     <footer class="player-bar">
         <div class="current-song">
@@ -157,6 +163,5 @@
         </div>
     </footer>
 
-    <audio id="audio-player"></audio>
 </body>
 </html>
