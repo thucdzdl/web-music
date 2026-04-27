@@ -3,57 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Music Player</title>
+    <title>H2T music</title>
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
+    </head>
 <body>
     <div class="sidebar">
-        <h2>🎵 MusicApp</h2>
-        <ul>
-            <li><i class="fas fa-home"></i> Khám phá</li>
-            <li><i class="fas fa-chart-line"></i> BXH</li>
-            <li><i class="fas fa-radio"></i> Radio</li>
-            <li><i class="fas fa-heart"></i> Yêu thích</li>
-        </ul>
+        <div class="logo">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="H2T Logo" style="height: 50px; width: auto; object-fit: contain; cursor: pointer;">
+</div>
+        <div class="menu-group">
+            <p class="menu-label">MENU</p>
+            <ul>
+                <li class="active"><i class="fas fa-home"></i> Khám phá</li>
+                <li><i class="fas fa-compass"></i> Xu hướng</li>
+                <li><i class="fas fa-radio"></i> Radio</li>
+            </ul>
+        </div>
+        <div class="menu-group" style="margin-top: 30px;">
+            <p class="menu-label">THƯ VIỆN</p>
+            <ul>
+                <li><i class="fas fa-history"></i> Nghe gần đây</li>
+                <li><i class="fas fa-heart"></i> Bài hát yêu thích</li>
+                <li><i class="fas fa-plus-square"></i> Tạo Playlist</li>
+            </ul>
+        </div>
     </div>
 
     <div class="main-content">
         <header>
-            <input type="text" placeholder="Tìm kiếm bài hát, nghệ sĩ...">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Tìm kiếm bài hát, nghệ sĩ, album...">
+            </div>
+            <div class="user-profile">
+                <i class="fas fa-bell notification"></i>
+                <img src="https://ui-avatars.com/api/?name=Admin&background=1DB954&color=fff" alt="avatar">
+                <span>Quản trị viên</span>
+            </div>
         </header>
 
         <section class="hero">
-            <h1>Nhạc Mới Mỗi Ngày</h1>
-            <p>Thưởng thức những giai điệu hot nhất hiện nay.</p>
+            <div class="hero-content">
+                <span class="badge-exclusive">ĐỘC QUYỀN</span>
+                <h1>Nghe nhạc không giới hạn</h1>
+                <p>Trải nghiệm âm thanh chất lượng cao cùng H2T Prenium.</p>
+                <button class="btn-play-hero"><i class="fas fa-play"></i> NGHE NGAY</button>
+            </div>
         </section>
 
-        <h3>Mới Phát Hành</h3>
+        <div class="section-header">
+            <h3>Gợi ý cho bạn</h3>
+            <span class="view-all">Xem tất cả</span>
+        </div>
+
         <div class="song-grid">
             {% for song in songs %}
             <div class="song-card">
-                <img src="{{ song.img }}" alt="cover">
-                <h4>{{ song.name }}</h4>
-                <p>{{ song.title }}</p>
-                <button class="play-btn"><i class="fas fa-play"></i></button>
+                <div class="card-img-container">
+                    <img src="{{ song.img }}" alt="cover">
+                    <button class="play-btn"><i class="fas fa-play"></i></button>
+                    {% if song.id is odd %}
+                    <span class="badge-hot">HOT</span>
+                    {% endif %}
+                </div>
+                <div class="card-info">
+                    <h4>{{ song.name }}</h4>
+                    <p>{{ song.title }}</p>
+                    <div class="card-actions">
+                        <i class="far fa-heart"></i>
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>
     </div>
 
     <div class="player-bar">
-        <div class="now-playing">
-            <p>Đang chọn: <b>Chọn một bài hát</b></p>
+        <div class="now-playing-detail">
+            <img src="https://via.placeholder.com/50" id="mini-album-art" alt="">
+            <div class="playing-info">
+                <p class="song-name">Đang chọn bài hát...</p>
+                <p class="artist-name">Nghệ sĩ</p>
+            </div>
+            <i class="far fa-heart"></i>
         </div>
-        <div class="controls">
-            <i class="fas fa-step-backward"></i>
-            <i class="fas fa-play-circle fa-2x"></i>
-            <i class="fas fa-step-forward"></i>
+
+        <div class="player-controls-wrapper">
+            <div class="controls">
+                <i class="fas fa-random"></i>
+                <i class="fas fa-step-backward"></i>
+                <i class="fas fa-play-circle fa-3x"></i>
+                <i class="fas fa-step-forward"></i>
+                <i class="fas fa-redo"></i>
+            </div>
+            <div class="progress-container">
+                <span>1:20</span>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <span>3:45</span>
+            </div>
         </div>
-        <div class="volume">
+
+        <div class="volume-controls">
+            <i class="fas fa-list"></i>
+            <i class="fas fa-desktop"></i>
             <i class="fas fa-volume-up"></i>
-            <input type="range" min="0" max="100">
+            <input type="range" min="0" max="100" value="80">
         </div>
     </div>
+   </div> <div class="right-sidebar">
+        <h3>Danh sách phát</h3>
+        <div class="queue-list">
+            {% for song in songs %}
+            <div class="queue-item">
+                <img src="{{ song.img }}" alt="">
+                <div class="queue-info">
+                    <p style="font-size: 14px; font-weight: bold;">{{ song.name }}</p>
+                    <p style="font-size: 12px; color: #b3b3b3;">{{ song.title }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="lyrics-section" style="margin-top: 40px;">
+            <p class="menu-label">LỜI BÀI HÁT</p>
+            <p style="color: #1DB954; font-style: italic; font-size: 14px;">
+                "Lời bài hát đang được cập nhật cho {{ songs[0].name }}..."
+            </p>
+        </div>
+    </div>
+
+    <div class="player-bar playing">
+        <div class="now-playing-detail">
+            <img src="{{ songs[0].img }}" class="spinning-disk" id="current-art">
+            <div class="playing-info" style="margin-left: 15px;">
+                <p class="song-name" style="font-weight: bold;">{{ songs[0].name }}</p>
+                <p class="artist-name" style="font-size: 12px; color: #b3b3b3;">{{ songs[0].title }}</p>
+            </div>
+        </div>
+
+        <div class="player-controls-wrapper">
+            <div class="controls">
+                <i class="fas fa-random"></i>
+                <i class="fas fa-step-backward"></i>
+                <i class="fas fa-play-circle fa-3x"></i>
+                <i class="fas fa-step-forward"></i>
+                <i class="fas fa-redo"></i>
+            </div>
+            <div class="progress-container">
+                <span>0:00</span>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <span>3:45</span>
+            </div>
+        </div>
+
+        <div class="volume-controls">
+            <i class="fas fa-volume-up"></i>
+            <input type="range" min="0" max="100" value="80">
+        </div>
+    </div>
+
+</body> </html> 
 </body>
 </html>
