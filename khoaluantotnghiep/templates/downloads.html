@@ -2,15 +2,13 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài hát đã thích - H2T Music</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
+    <title>Danh sách tải xuống - H2T Music</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="app-container">
+        <!-- SIDEBAR (Bạn nhớ copy Sidebar đồng bộ với các trang khác) -->
         <aside class="sidebar">
         <div class="logo">
             <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
@@ -63,37 +61,21 @@
                     </div>
                 </div>
             </header>
-        <main class="main-content no-padding">
-            <header class="top-bar transparent">
-                <button onclick="history.back()" class="circle-btn"><i class="fas fa-chevron-left"></i></button>
+        <main class="main-content">
+            <header class="top-bar">
+                <h1 style="color: white;">Nội dung đã tải xuống</h1>
+                <p style="color: #b3b3b3; font-size: 14px;">Bạn có thể nghe các bài hát này ngay cả khi không có mạng.</p>
             </header>
 
-            <section class="favorites-hero">
-                <div class="heart-box">
-                    <i class="fas fa-heart"></i>
-                </div>
-                <div class="hero-text">
-                    <p class="upper">PLAYLIST</p>
-                    <h1>Bài hát đã thích</h1>
-                    <div class="meta">
-                        <img src="https://ui-avatars.com/api/?name=Admin&background=1DB954&color=fff" class="mini-avatar">
-                        <strong>Quản trị viên</strong> • {{ songs|length }} bài hát
-                    </div>
-                </div>
-            </section>
-
-            <div class="songs-container">
-                <div class="action-buttons">
-                    <button class="play-all-btn"><i class="fas fa-play"></i></button>
-                </div>
-
+            <div class="downloads-container" style="padding: 20px;">
                 <table class="song-table">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Tiêu đề</th>
                             <th>Nghệ sĩ</th>
-                            <th style="text-align: right;"><i class="far fa-clock"></i></th>
+                            <th>Dung lượng</th>
+                            <th style="text-align: center;">Trạng thái</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,13 +83,16 @@
                         <tr class="song-row">
                             <td>{{ loop.index }}</td>
                             <td>
-                                <div class="song-info-flex">
-                                    <img src="{{ song.img }}" alt="">
-                                    <span>{{ song.name }}</span>
+                                <div class="song-item" style="display: flex; align-items: center; gap: 10px;">
+                                    <img src="{{ song.img }}" style="width: 40px; border-radius: 4px;">
+                                    <span style="color: white;">{{ song.name }}</span>
                                 </div>
                             </td>
-                            <td>{{ song.title }}</td>
-                            <td style="text-align: right;">3:45</td>
+                            <td>{{ song.artist }}</td>
+                            <td>{{ song.size }}</td>
+                            <td style="text-align: center; color: #1DB954;">
+                                <i class="fas fa-check-circle"></i>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -115,8 +100,8 @@
             </div>
         </main>
     </div>
-
-<footer class="player-bar">
+    
+    <footer class="player-bar">
         <div class="current-song">
             <div class="disk-wrapper">
                 <img src="{{ songs[0].img }}" id="current-img" class="spinning">

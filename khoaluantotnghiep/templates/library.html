@@ -11,46 +11,57 @@
 </head>
 <body>
     <div class="app-container">
-        <aside class="sidebar">
-            <div class="logo">
-                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
-                <span>H2T Music</span>
-            </div>
-            <nav class="menu-group">
-                <p class="label">KHÁM PHÁ</p>
-                <ul class="nav-list">
-                    <li><a href="/"><i class="fas fa-home"></i><span>Trang chủ</span></a></li>
-                    <li><a href="/trending"><i class="fas fa-bolt"></i><span>Thịnh hành</span></a></li>
-                    <li class="active"><a href="/library"><i class="fas fa-layer-group"></i><span>Thư viện</span></a></li>
-                </ul>
-                </nav>
+       <aside class="sidebar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+            <span>H2T Music</span>
+        </div>
+        <nav class="menu-group">
+            <p class="label">KHÁM PHÁ</p>
+            <ul class="nav-list">
+    <li class="{{ 'active' if request.path == '/' else '' }}"><a href="/"><i class="fas fa-home"></i><span>Trang chủ</span></a></li>
+    <li class="{{ 'active' if request.path == '/trending' else '' }}">
+        <a href="/trending">
+            <i class="fas fa-bolt"></i>
+            <span>Thịnh hành</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="/library">
+            <i class="fas fa-layer-group"></i>
+            <span>Thư viện</span>
+        </a>
+    </li>
+</ul>
+        </nav>
         <nav class="menu-group">
             <p class="label">CÁ NHÂN</p>
             <ul>
-                <li><i class="fas fa-heart"></i> Yêu thích</li>
-                <li><i class="fas fa-history"></i> Nghe gần đây</li>
-                <li><i class="fas fa-plus-circle"></i> Tạo Playlist</li>
+                <li><a href="/favorites"><i class="fas fa-heart"></i> Yêu thích</a></li>
+                <li><a href="/history"><i class="fas fa-history"></i> Nghe gần đây</a></li>
+                <li><a href="/playlist"><i class="fas fa-plus-circle"></i> Playlist</a></li>
+                <li><a href="/downloads"><i class="fas fa-arrow-alt-circle-down"></i><span> Tải xuống</span></a></li>
             </ul>
         </nav>
-            </nav>
-        </aside>
-
-       <main class="main-content">
-        <header class="top-bar">
-    <div class="nav-buttons">
-        <i class="fas fa-chevron-left"></i>
-        <i class="fas fa-chevron-right"></i>
+    </aside>
+<main class="main-content">
+            <header class="top-bar">
+                <div class="search-container">
+    <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Bạn muốn nghe gì?">
     </div>
-    
-    <div class="user-actions">
-        <i class="far fa-bell icon-btn"></i>
-        <i class="fas fa-users icon-btn"></i>
-        <div class="auth-buttons">
-            <a href="/register" class="btn-signup">Đăng ký</a>
-            <a>/<a\>
-            <a href="/login" class="btn-login">Đăng nhập</a>
-        </div>
-    </div>
+</div>
+                <div class="user-actions">
+                    <i class="far fa-bell icon-btn"></i>
+                    <i class="fas fa-users icon-btn"></i>
+                    <div class="auth-buttons">
+                        <a href="/register" class="btn-signup">Đăng ký</a>
+                        <a>/<a\>
+                        <a href="/login" class="btn-login">Đăng nhập</a>
+                    </div>
+                </div>
             </header>
 
             <section class="library-header">

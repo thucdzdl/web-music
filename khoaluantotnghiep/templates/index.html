@@ -19,13 +19,7 @@
         <nav class="menu-group">
             <p class="label">KHÁM PHÁ</p>
             <ul class="nav-list">
-    <li class="{{ 'active' if request.path == '/' else '' }}">
-        <a href="/">
-            <i class="fas fa-home"></i>
-            <span>Trang chủ</span>
-        </a>
-    </li>
-
+    <li class="{{ 'active' if request.path == '/' else '' }}"><a href="/"><i class="fas fa-home"></i><span>Trang chủ</span></a></li>
     <li class="{{ 'active' if request.path == '/trending' else '' }}">
         <a href="/trending">
             <i class="fas fa-bolt"></i>
@@ -45,29 +39,30 @@
             <p class="label">CÁ NHÂN</p>
             <ul>
                 <li><a href="/favorites"><i class="fas fa-heart"></i> Yêu thích</a></li>
-                <li><i class="fas fa-history"></i> Nghe gần đây</li>
-                <li><i class="fas fa-plus-circle"></i> Tạo Playlist</li>
+                <li><a href="/history"><i class="fas fa-history"></i> Nghe gần đây</a></li>
+                <li><a href="/playlist"><i class="fas fa-plus-circle"></i> Playlist</a></li>
+                <li><a href="/downloads"><i class="fas fa-arrow-alt-circle-down"></i><span> Tải xuống</span></a></li>
             </ul>
         </nav>
     </aside>
-
     <main class="main-content">
-        <header class="top-bar">
-    <div class="nav-buttons">
-        <i class="fas fa-chevron-left"></i>
-        <i class="fas fa-chevron-right"></i>
+            <header class="top-bar">
+                <div class="search-container">
+    <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Bạn muốn nghe gì?">
     </div>
-    
-    <div class="user-actions">
-        <i class="far fa-bell icon-btn"></i>
-        <i class="fas fa-users icon-btn"></i>
-        <div class="auth-buttons">
-            <a href="/register" class="btn-signup">Đăng ký</a>
-            <a>/</a>
-            <a href="/login" class="btn-login">Đăng nhập</a>
-        </div>
-    </div>
-</header>
+</div>
+                <div class="user-actions">
+                    <i class="far fa-bell icon-btn"></i>
+                    <i class="fas fa-users icon-btn"></i>
+                    <div class="auth-buttons">
+                        <a href="/register" class="btn-signup">Đăng ký</a>
+                        <a>/<a\>
+                        <a href="/login" class="btn-login">Đăng nhập</a>
+                    </div>
+                </div>
+            </header>
 
         <section class="banner">
             <div class="banner-text">
@@ -156,7 +151,5 @@
             <input type="range" min="0" max="100" value="70">
         </div>
     </footer>
-
-    <audio id="audio-player"></audio>
 </body>
 </html>

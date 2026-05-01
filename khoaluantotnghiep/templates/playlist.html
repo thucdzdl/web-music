@@ -2,15 +2,13 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài hát đã thích - H2T Music</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
+    <title>{{ playlist.name }} - H2T Music</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="app-container">
+        <!-- SIDEBAR (Copy lại Sidebar từ index.html) -->
         <aside class="sidebar">
         <div class="logo">
             <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
@@ -45,7 +43,7 @@
             </ul>
         </nav>
     </aside>
-<main class="main-content">
+        <main class="main-content">
             <header class="top-bar">
                 <div class="search-container">
     <div class="search-bar">
@@ -63,28 +61,27 @@
                     </div>
                 </div>
             </header>
+        <!-- MAIN CONTENT -->
         <main class="main-content no-padding">
-            <header class="top-bar transparent">
-                <button onclick="history.back()" class="circle-btn"><i class="fas fa-chevron-left"></i></button>
-            </header>
 
-            <section class="favorites-hero">
-                <div class="heart-box">
-                    <i class="fas fa-heart"></i>
+            <section class="playlist-header">
+                <div class="playlist-img">
+                    <img src="{{ playlist.img }}" alt="Cover">
                 </div>
-                <div class="hero-text">
-                    <p class="upper">PLAYLIST</p>
-                    <h1>Bài hát đã thích</h1>
-                    <div class="meta">
-                        <img src="https://ui-avatars.com/api/?name=Admin&background=1DB954&color=fff" class="mini-avatar">
-                        <strong>Quản trị viên</strong> • {{ songs|length }} bài hát
+                <div class="playlist-info">
+                    <p class="tag">PLAYLIST</p>
+                    <h1 class="playlist-title">{{ playlist.name }}</h1>
+                    <p class="playlist-desc">{{ playlist.desc }}</p>
+                    <div class="playlist-meta">
+                        <strong>{{ playlist.author }}</strong> • {{ songs|length }} bài hát
                     </div>
                 </div>
             </section>
 
             <div class="songs-container">
-                <div class="action-buttons">
-                    <button class="play-all-btn"><i class="fas fa-play"></i></button>
+                <div class="action-bar">
+                    <button class="btn-play-big"><i class="fas fa-play"></i></button>
+                    <i class="far fa-heart action-icon"></i>
                 </div>
 
                 <table class="song-table">
@@ -101,12 +98,14 @@
                         <tr class="song-row">
                             <td>{{ loop.index }}</td>
                             <td>
-                                <div class="song-info-flex">
+                                <div class="song-item">
                                     <img src="{{ song.img }}" alt="">
-                                    <span>{{ song.name }}</span>
+                                    <div class="name-artist">
+                                        <div class="song-name">{{ song.name }}</div>
+                                    </div>
                                 </div>
                             </td>
-                            <td>{{ song.title }}</td>
+                            <td>{{ song.artist }}</td>
                             <td style="text-align: right;">3:45</td>
                         </tr>
                         {% endfor %}

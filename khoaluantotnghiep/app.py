@@ -100,6 +100,42 @@ def favorites():
     # Ở đây mình dùng toàn bộ danh sách songs để hiển thị mẫu
     return render_template('favorites.html', songs=songs, current_song=songs[0])
 
+
+# --- 7. History ---
+@app.route('/history')
+def history():
+    # Giả lập danh sách bài hát đã nghe gần đây
+    # Thực tế sẽ lấy từ database hoặc session người dùng
+    recently_played = [
+        {"id": 1, "name": "Đừng Làm Trái Tim Anh Đau", "title": "Sơn Tùng M-TP", "img": "https://i.ytimg.com/vi/a6as_VovpSg/maxresdefault.jpg", "time_ago": "2 phút trước"},
+        {"id": 4, "name": "Ngủ Một Mình", "title": "HIEUTHUHAI", "img": "https://i.ytimg.com/vi/q_VpYf_VvY8/maxresdefault.jpg", "time_ago": "1 giờ trước"},
+        {"id": 2, "name": "Nấu Ăn Cho Em", "title": "Đen Vâu", "img": "https://i.ytimg.com/vi/S7ENm43-XGk/maxresdefault.jpg", "time_ago": "Hôm qua"},
+    ]
+    return render_template('history.html', songs=recently_played, current_song=songs[0])
+
+# --- 8. Playslist ---
+@app.route('/playlist')
+def playlist_detail():
+    # Playlist mặc định để hiển thị khi bạn truy cập /playlist
+    playlist = {
+        "name": "GIAI ĐIỆU GÂY NGHIỆN ",
+        "author": "H2T Music",
+        "img": "https://i.scdn.co/image/ab67706f00000002b60dbde074a2931ea834324f",
+        "desc": "Danh sách những bài hát bạn yêu thích nhất."
+    }
+    # songs lấy từ danh sách bài hát chung của bạn
+    return render_template('playlist.html', playlist=playlist, songs=songs, current_song=songs[0])
+
+# --- 9. Downloads ---
+# Thêm vào app.py
+@app.route('/downloads')
+def downloads():
+    # Giả lập danh sách bài hát đã được tải xuống
+    downloaded_songs = [
+        {"id": 1, "name": "Đừng Làm Trái Tim Anh Đau", "artist": "Sơn Tùng M-TP", "img": "https://i.ytimg.com/vi/a6as_VovpSg/maxresdefault.jpg", "size": "8.5 MB"},
+        {"id": 3, "name": "Nếu Lúc Đó", "artist": "tlinh", "img": "https://i.ytimg.com/vi/7v_FpGv9zYc/maxresdefault.jpg", "size": "7.2 MB"}
+    ]
+    return render_template('downloads.html', songs=downloaded_songs, current_song=songs[0])
 # --- CHẠY ỨNG DỤNG ---
 
 if __name__ == '__main__':
